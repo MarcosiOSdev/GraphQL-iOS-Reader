@@ -12,9 +12,20 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        retrieveDatas()
     }
 
 
+    
+    func retrieveDatas() {
+        Network.shared.client.fetch(query: AllPostsQuery()) { result in            
+            switch result {
+            case let .success(data):
+                print(data.data?.getUsers?.forEach{ print($0)})
+            case .failure:
+                print("Error")
+            }
+        }
+    }
 }
 
